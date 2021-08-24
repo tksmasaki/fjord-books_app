@@ -10,6 +10,9 @@
   </head>
 
   <body>
+    <% I18n.available_locales.reject { |i| i == I18n.locale }.each do |locale| %>
+      <%= link_to t("links.translation.#{locale}"), locale: locale %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

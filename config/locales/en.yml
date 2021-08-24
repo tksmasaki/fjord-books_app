@@ -31,3 +31,26 @@
 
 en:
   hello: "Hello world"
+
+  notice:
+    book:
+      create_successful: Book was successfully created.
+      update_successful: Book was successfully updated.
+      destroy_successful: Book was successfully destroyed.
+
+  confirm:
+    delete: Are you sure?
+
+  links:
+    back: Back
+    edit: Edit
+    destroy: Destroy
+    new_book: New Book
+    show: Show
+    translation:
+      ja: 日本語で閲覧
+
+  titles:
+    books: Books
+    editing_book: Editing Book
+    new_book: New Book
