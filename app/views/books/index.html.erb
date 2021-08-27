@@ -28,6 +28,11 @@
   </tbody>
 </table>
 
+<div>
+  <%= paginate @books %>
+  <%= page_entries_info @books %>
+</div>
+
 <br>
 
 <%= link_to t('views.common.new'), new_book_path %>
