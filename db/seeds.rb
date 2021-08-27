@@ -45,7 +45,10 @@ end
 50.times do |n|
   User.create!(
     email: "user#{n + 1}@example.com",
-    password: 'password'
+    password: 'password',
+    address: Faker::Address.full_address,
+    postcode: Faker::Address.postcode,
+    self_introduction: Faker::Lorem.paragraph(sentence_count: 10)
   )
 end
 
