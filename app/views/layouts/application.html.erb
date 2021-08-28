@@ -10,17 +10,19 @@
   </head>
 
   <body>
-    <header>
-      <p class="right-aligned">
-        <% if user_signed_in? %>
-            <%= link_to "#{current_user.email}", edit_user_registration_path %> |
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "アカウント登録", new_user_registration_path %> |
-          <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
-      </p>
-    </header>
+    <% if user_signed_in? %>
+      <header>
+        <p class="right-aligned">
+          <%= link_to "#{current_user.email}", user_path(current_user) %> |
+          <% if request.path.match(/\A\/books/) %>
+            <%= link_to "ユーザー一覧", users_path %> |
+          <% else %>
+            <%= link_to "本一覧", books_path %> |
+          <% end %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        </p>
+      </header>
+    <% end %>
     <%= yield %>
   </body>
 </html>
