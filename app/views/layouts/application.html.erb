@@ -23,6 +23,10 @@
         </p>
       </header>
     <% end %>
+    <% if request.path == '/users/sign_in' %>
+      <p id="notice"><%= notice %></p>
+      <p id="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
