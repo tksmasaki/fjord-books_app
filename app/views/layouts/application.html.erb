@@ -15,11 +15,11 @@
         <p class="right-aligned">
           <%= link_to "#{current_user.email}", user_path(current_user) %> |
           <% if request.path.match(/\A\/books/) %>
-            <%= link_to "ユーザー一覧", users_path %> |
+            <%= link_to t('views.links.users_index'), users_path %> |
           <% else %>
-            <%= link_to "本一覧", books_path %> |
+            <%= link_to t('views.links.books_index'), books_path %> |
           <% end %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= link_to t('views.links.sign_out'), destroy_user_session_path, method: :delete %>
         </p>
       </header>
     <% end %>
