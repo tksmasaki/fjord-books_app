@@ -112,6 +112,7 @@ ja:
       accepted: を受諾してください
       blank: を入力してください
       confirmation: と%{attribute}の入力が一致しません
+      content_type_invalid: のコンテントタイプが不正です
       empty: を入力してください
       equal_to: は%{count}にしてください
       even: は偶数にしてください
