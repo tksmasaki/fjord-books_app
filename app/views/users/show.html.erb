@@ -27,7 +27,7 @@
 
 <p>
   <strong><%= User.human_attribute_name(:user_icon) %>:</strong><br>
-  <%= image_tag @user.display_user_icon(100) if @user.user_icon.attached? %>
+  <%= image_tag @user.display_user_icon(size: 100) if @user.user_icon.attached? %>
 </p>
 
 <% if current_user == @user %>

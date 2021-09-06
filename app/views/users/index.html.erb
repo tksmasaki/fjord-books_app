@@ -15,7 +15,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= image_tag user.display_user_icon(30) if user.user_icon.attached? %></td>
+        <td><%= image_tag user.display_user_icon(size: 30) if user.user_icon.attached? %></td>
         <td><%= user.email %></td>
         <td><%= user.name %></td>
         <td><%= user.postal_code %></td>

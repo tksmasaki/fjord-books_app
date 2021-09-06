@@ -20,6 +20,6 @@
 
 <div class="field">
   <%= f.label :user_icon %>
-  <%= image_tag resource.display_user_icon(50) if resource.user_icon.attached? %>
+  <%= image_tag resource.display_user_icon(size: 50) if resource.user_icon.attached? %>
   <%= f.file_field :user_icon, accept: 'image/jpeg, image/png, image/gif' %>
 </div>
