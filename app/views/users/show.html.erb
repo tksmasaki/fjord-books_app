@@ -1,5 +1,25 @@
 <h1><%= t('views.common.title_show', name: User.model_name.human) %></h1>
 
+<% unless current_user == @user %>
+  <div id="follow_form">
+    <% if current_user.following?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+      <%= render 'follow' %>
+    <% end %>
+  </div>
+<% end %>
+
+<p>
+  <a href="<%= followings_user_path(@user) %>">
+    <strong id="followings"><%= @user.followings.count %></strong>&nbsp;<%= t('views.common.followings') %>
+  </a>
+  |
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers"><%= @user.followers.count %></strong>&nbsp;<%= t('views.common.followers') %>
+  </a>
+</p>
+
 <p>
   <strong><%= User.human_attribute_name(:email) %>:</strong>
   <%= @user.email %>

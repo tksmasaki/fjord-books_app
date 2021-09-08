@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_231050) do
+ActiveRecord::Schema.define(version: 2021_09_08_021957) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_231050) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(version: 2021_05_31_231050) do
     t.text "self_introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "users_relationships", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "following_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id", "following_id"], name: "index_users_relationships_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_users_relationships_on_follower_id"
+    t.index ["following_id"], name: "index_users_relationships_on_following_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
