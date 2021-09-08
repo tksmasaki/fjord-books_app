@@ -17,3 +17,9 @@
   <%= f.label :self_introduction %>
   <%= f.text_area :self_introduction %>
 </div>
+
+<div class="field">
+  <%= f.label :user_icon %>
+  <%= image_tag resource.display_user_icon(size: 50) if resource.user_icon.attached? %>
+  <%= f.file_field :user_icon, accept: 'image/jpeg, image/png, image/gif' %>
+</div>
