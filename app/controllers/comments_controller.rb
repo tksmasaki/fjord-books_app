@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_commentable_type_and_id
   before_action :set_parent_instance
 
   def create
@@ -20,14 +19,9 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_commentable_type_and_id
-    type_and_id = request.path.split('/').slice(1, 2)
-    @type = type_and_id[0].singularize.capitalize
-    @id = type_and_id[1].to_i
-  end
-
   def set_parent_instance
-    @parent_instance = Object.const_get(@type).find(@id)
+    type, id = request.path.split('/').slice(1, 2)
+    @parent_instance = Object.const_get(type.singularize.capitalize).find(id.to_i)
   end
 
   def comment_params
