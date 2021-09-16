@@ -4,7 +4,7 @@ module BelongsToUser
   extend ActiveSupport::Concern
 
   included do
-    scope :with_username, -> { joins(:user).select("#{name.downcase.pluralize}.*, email, name AS username") }
+    scope :with_username, -> { joins(:user).select("#{name.downcase.pluralize}.*, users.email, users.name AS username") }
 
     def author_name
       # BelongsToUser.with_usernameを呼び出さずにインスタンス生成した場合に対応
