@@ -25,3 +25,7 @@
   <%= link_to t('views.common.destroy'), @report, method: :delete, data: { confirm: t('views.common.delete_confirm') } %> |
 <% end %>
 <%= link_to t('views.common.back'), reports_path %>
+
+<%= render 'comments/index', comments: @comments, parent_instance: @report %>
+
+<%= render 'comments/form', comment: @comment, parent_instance: @report %>

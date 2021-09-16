@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  include CommentsActions
+
   before_action :set_book, only: %i[show edit update destroy]
 
   # GET /books
@@ -11,7 +13,10 @@ class BooksController < ApplicationController
 
   # GET /books/1
   # GET /books/1.json
-  def show; end
+  def show
+    set_comments_index
+    set_comments_form
+  end
 
   # GET /books/new
   def new
@@ -71,5 +76,9 @@ class BooksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def book_params
     params.require(:book).permit(:title, :memo, :author, :picture)
+  end
+
+  def comments_parent_instance
+    @book
   end
 end

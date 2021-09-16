@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :set_report_with_author_name, only: %i[show edit]
+  include CommentsActions
+
+  before_action :set_report_with_username, only: %i[show edit]
   before_action :correct_user, only: %i[edit update destroy]
 
   def index
-    @reports = Report.with_author_name.order_by_latest.page(params[:page])
+    @reports = Report.with_username.order_by_latest.page(params[:page])
   end
 
-  def show; end
+  def show
+    set_comments_index
+    set_comments_form
+  end
 
   def new
     @report = Report.new
@@ -18,7 +23,6 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    @report.user_id = current_user.id
     if @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
@@ -42,15 +46,19 @@ class ReportsController < ApplicationController
   private
 
   def report_params
-    params.require(:report).permit(:title, :content)
+    params.require(:report).permit(:title, :content).merge({ user_id: current_user.id })
   end
 
-  def set_report_with_author_name
-    @report = Report.with_author_name.find(params[:id])
+  def set_report_with_username
+    @report = Report.with_username.find(params[:id])
   end
 
   def correct_user
     @report ||= Report.find(params[:id])
-    redirect_to(root_url, notice: '不正な操作です') unless @report.user_id == current_user.id
+    redirect_to(root_url) unless @report.user_id == current_user.id
+  end
+
+  def comments_parent_instance
+    @report
   end
 end
