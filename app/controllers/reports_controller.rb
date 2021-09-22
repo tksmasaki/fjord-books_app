@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  include CommentsActions
-
   before_action :set_report_with_user, only: %i[show edit]
   before_action :correct_user, only: %i[edit update destroy]
 
@@ -11,8 +9,8 @@ class ReportsController < ApplicationController
   end
 
   def show
-    set_comments_index
-    set_comments_form
+    @comment = Comment.new
+    @comments = @report.comments.eager_load(:user).order_by_oldest
   end
 
   def new
@@ -56,9 +54,5 @@ class ReportsController < ApplicationController
   def correct_user
     @report ||= Report.find(params[:id])
     redirect_to(root_url) unless @report.user_id == current_user.id
-  end
-
-  def comments_parent_instance
-    @report
   end
 end
