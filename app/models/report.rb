@@ -6,5 +6,5 @@ class Report < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  scope :order_by_latest, -> { order('created_at DESC, id') }
+  scope :order_by_latest, -> { order('reports.created_at DESC, reports.id') }
 end

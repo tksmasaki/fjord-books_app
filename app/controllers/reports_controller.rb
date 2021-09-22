@@ -3,11 +3,11 @@
 class ReportsController < ApplicationController
   include CommentsActions
 
-  before_action :set_report_with_username, only: %i[show edit]
+  before_action :set_report_with_user, only: %i[show edit]
   before_action :correct_user, only: %i[edit update destroy]
 
   def index
-    @reports = Report.with_username.order_by_latest.page(params[:page])
+    @reports = Report.eager_load(:user).order_by_latest.page(params[:page])
   end
 
   def show
@@ -49,8 +49,8 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:title, :content).merge({ user_id: current_user.id })
   end
 
-  def set_report_with_username
-    @report = Report.with_username.find(params[:id])
+  def set_report_with_user
+    @report = Report.eager_load(:user).find(params[:id])
   end
 
   def correct_user

@@ -14,7 +14,7 @@ module CommentsActions
   end
 
   def set_comments_index
-    @comments = comments_parent_instance.comments.with_username.order_by_oldest
+    @comments = comments_parent_instance.comments.eager_load(:user).order_by_oldest
   end
 
   private
