@@ -11,7 +11,10 @@ class BooksController < ApplicationController
 
   # GET /books/1
   # GET /books/1.json
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @book.comments.eager_load(:user).order_by_oldest
+  end
 
   # GET /books/new
   def new

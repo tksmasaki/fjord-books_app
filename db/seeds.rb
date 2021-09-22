@@ -83,4 +83,16 @@ User.order(id: :desc).each do |user|
   end
 end
 
+Report.destroy_all
+
+Report.transaction do
+  User.order(:id).limit(30).each do |user|
+    Report.create!(
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence,
+      user_id: user.id
+    )
+  end
+end
+
 puts '初期データの投入が完了しました。' # rubocop:disable Rails/Output

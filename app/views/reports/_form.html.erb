@@ -1,0 +1,41 @@
+<%= form_with(model: report, local: true) do |f| %>
+  <% if report.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= t("errors.messages.not_saved.other", count: report.errors.count,
+                                                 resource: Report.model_name.human)%>
+      </h2>
+      <ul>
+        <% report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <% if controller.action_name == 'edit' %>
+    <p>
+      <strong><%= Report.human_attribute_name(:created_at) %>:</strong>
+      <%= l report.created_at, format: :date %>
+    </p>
+
+    <p>
+      <strong><%= User.model_name.human %>:</strong>
+      <%= report.author_name %>
+    </p>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
