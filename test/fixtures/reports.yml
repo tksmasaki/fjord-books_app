@@ -2,5 +2,12 @@
 
 alice_report:
   user: alice
-  title: MyString
-  content: MyText
+  title: MyTitle
+  content: MyContent
+
+<% 10.times do |i| %>
+report_<%= i %>:
+  user: user_<%= i %>
+  title: MyTitle
+  content: MyContent
+<% end %>

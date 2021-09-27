@@ -3,7 +3,9 @@
 one:
   title: MyString
   memo: MyText
+  author: Matz
 
 two:
   title: MyString
   memo: MyText
+  author: DHH

@@ -13,3 +13,10 @@ bob:
   email: bob@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   name: Bob
+
+<% 10.times do |i| %>
+user_<%= i %>:
+  email: user_<%= i %>@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  name: user_<%= i %>
+<% end %>
