@@ -9,15 +9,15 @@ class ReportTest < ActiveSupport::TestCase
     @alice_report = reports(:alice_report)
   end
 
-  test 'should #editable?(target_user) return true when #user equal target_user' do
+  test '#editable?(target_user) should return true when #user equals target_user' do
     assert @alice_report.editable?(@alice)
   end
 
-  test 'should #editable?(target_user) return false when #user differ from target_user' do
+  test '#editable?(target_user) should return false when #user differs from target_user' do
     assert_not @alice_report.editable?(@bob)
   end
 
-  test 'should #created_on return Date object' do
-    assert_instance_of(Date, @alice_report.created_on)
+  test '#created_on should return created_at converted to Date object' do
+    assert_equal @alice_report.created_at.to_date, @alice_report.created_on
   end
 end
