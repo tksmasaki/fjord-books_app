@@ -2,12 +2,12 @@
 
 alice_report:
   user: alice
-  title: MyTitle
-  content: MyContent
+  title: テストについての学習
+  content: テストの書き方について学習した
 
 <% 10.times do |i| %>
 report_<%= i %>:
   user: user_<%= i %>
-  title: MyTitle
-  content: MyContent
+  title: 日報#<%= i %>
+  content: 日報#<%= i %>の詳細
 <% end %>

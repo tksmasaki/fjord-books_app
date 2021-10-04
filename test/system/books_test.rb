@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'application_system_test_case'
-require 'test_helper'
+require_relative '../support/system_test_action'
 
 class BooksTest < ApplicationSystemTestCase
   include SystemTestAction
@@ -11,61 +11,48 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'visiting the index' do
-    assert_selector 'h1', text: Book.model_name.human
+    assert_selector 'h1', text: '本'
   end
 
   test 'creating a Book' do
-    click_on I18n.t('views.common.new')
+    click_on '新規作成'
 
-    title = '本を作成'
-    memo = '本を作成しました'
-    author = 'Alice'
-    picture = Rails.root.join('db/seeds/cherry-book.jpg')
-    fill_in_book_form title: title, memo: memo, author: author, picture: picture
-    click_on I18n.t('helpers.submit.create')
+    fill_in 'タイトル', with: 'チェリー本'
+    fill_in 'メモ', with: 'プログラミング経験者のためのRuby入門書です。'
+    fill_in '著者', with: '伊藤 淳一'
+    attach_file '画像', Rails.root.join('db/seeds/cherry-book.jpg')
+    click_on '登録する'
 
-    assert_text I18n.t('controllers.common.notice_create', name: Book.model_name.human)
-    assert_text_book title: title, memo: memo, author: author
+    assert_selector 'p#notice', text: '本が作成されました。'
+    assert_text 'チェリー本'
+    assert_text 'プログラミング経験者のためのRuby入門書です。'
+    assert_text '伊藤 淳一'
     assert_selector 'img[src$="cherry-book.jpg"]'
   end
 
   test 'updating a Book' do
     within 'tbody' do
-      click_on I18n.t('views.common.edit'), match: :first
+      click_on '編集', match: :first
     end
 
-    title = '本を更新'
-    memo = '本を更新しました'
-    author = 'Alice'
-    picture = Rails.root.join('db/seeds/cherry-book.jpg')
-    fill_in_book_form title: title, memo: memo, author: author, picture: picture
-    click_on I18n.t('helpers.submit.update')
+    fill_in 'タイトル', with: 'チェリー本'
+    fill_in 'メモ', with: 'プログラミング経験者のためのRuby入門書です。'
+    fill_in '著者', with: '伊藤 淳一'
+    attach_file '画像', Rails.root.join('db/seeds/cherry-book.jpg')
+    click_on '更新する'
 
-    assert_text I18n.t('controllers.common.notice_update', name: Book.model_name.human)
-    assert_text_book title: title, memo: memo, author: author
+    assert_selector 'p#notice', text: '本が更新されました。'
+    assert_text 'チェリー本'
+    assert_text 'プログラミング経験者のためのRuby入門書です。'
+    assert_text '伊藤 淳一'
     assert_selector 'img[src$="cherry-book.jpg"]'
   end
 
   test 'destroying a Book' do
     page.accept_confirm do
-      click_on I18n.t('views.common.destroy'), match: :first
+      click_on '削除', match: :first
     end
 
-    assert_text I18n.t('controllers.common.notice_destroy', name: Book.model_name.human)
-  end
-
-  private
-
-  def fill_in_book_form(title:, memo:, author:, picture:)
-    fill_in Book.human_attribute_name(:title), with: title
-    fill_in Book.human_attribute_name(:memo), with: memo
-    fill_in Book.human_attribute_name(:author), with: author
-    attach_file Book.human_attribute_name(:picture), picture
-  end
-
-  def assert_text_book(title:, memo:, author:)
-    assert_text title
-    assert_text memo
-    assert_text author
+    assert_selector 'p#notice', text: '本が削除されました。'
   end
 end
