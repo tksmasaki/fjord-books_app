@@ -11,10 +11,12 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'visiting the index' do
+    visit books_url
     assert_selector 'h1', text: '本'
   end
 
   test 'creating a Book' do
+    visit books_url
     click_on '新規作成'
 
     fill_in 'タイトル', with: 'チェリー本'
@@ -31,6 +33,7 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'updating a Book' do
+    visit books_url
     within 'tbody' do
       click_on '編集', match: :first
     end
@@ -49,10 +52,15 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'destroying a Book' do
+    visit books_url
+
+    # books.yml のidが最大のデータ
+    assert_text 'Ruby超入門'
     page.accept_confirm do
       click_on '削除', match: :first
     end
 
     assert_selector 'p#notice', text: '本が削除されました。'
+    assert_no_text 'Ruby超入門'
   end
 end

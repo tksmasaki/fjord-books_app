@@ -4,6 +4,7 @@ alice_report:
   user: alice
   title: テストについての学習
   content: テストの書き方について学習した
+  created_at: <%= Time.new(2021, 10, 4, 12, 0 , 0) %>
 
 <% 10.times do |i| %>
 report_<%= i %>:

@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   title: 言語のしくみ
   memo: 言語の作り方を学べる
   author: まつもと ゆきひろ
 
 two:
+  id: 2
   title: Ruby超入門
   memo: Rubyの文法の基本をやさしくていねいに解説しています。
   author: 五十嵐 邦明
