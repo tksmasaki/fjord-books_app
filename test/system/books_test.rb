@@ -54,13 +54,23 @@ class BooksTest < ApplicationSystemTestCase
   test 'destroying a Book' do
     visit books_url
 
-    # books.yml のidが最大のデータ
-    assert_text 'Ruby超入門'
-    page.accept_confirm do
-      click_on '削除', match: :first
+    # Ruby超入門が何番目に出てくるか探し出す
+    index = find_book_index('Ruby超入門')
+    # tableのindex行目にフォーカスを絞り込んで検証とボタンクリックを実行する
+    within(all('tbody tr')[index]) do
+      assert_text 'Ruby超入門'
+      page.accept_confirm do
+        click_on '削除'
+      end
     end
 
     assert_selector 'p#notice', text: '本が削除されました。'
     assert_no_text 'Ruby超入門'
+  end
+
+  private
+
+  def find_book_index(title)
+    Book.order(id: :desc).find_index { |book| book.title == title }
   end
 end
