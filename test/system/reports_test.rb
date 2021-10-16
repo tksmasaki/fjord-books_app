@@ -104,7 +104,7 @@ class ReportsTest < ApplicationSystemTestCase
     # reports.yml のログインユーザー(alice)の日報データ
     assert_text 'テストについての学習'
     page.accept_confirm do
-      click_on I18n.t('views.common.destroy'), match: :first
+      click_on '削除', match: :first
     end
 
     assert_selector 'p#notice', text: '日報が削除されました。'
