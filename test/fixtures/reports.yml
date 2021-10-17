@@ -1,11 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  title: MyString
-  content: MyText
+alice_report:
+  user: alice
+  title: テストについての学習
+  content: テストの書き方について学習した
+  created_at: <%= Time.new(2021, 10, 4, 12, 0 , 0) %>
 
-two:
-  user: two
-  title: MyString
-  content: MyText
+<% 10.times do |i| %>
+report_<%= i %>:
+  user: user_<%= i %>
+  title: 日報#<%= i %>
+  content: 日報#<%= i %>の詳細
+<% end %>
