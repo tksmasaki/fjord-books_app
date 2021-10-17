@@ -54,9 +54,7 @@ class BooksTest < ApplicationSystemTestCase
   test 'destroying a Book' do
     visit books_url
 
-    # Ruby超入門が何番目に出てくるか探し出す
     index = find_book_index('Ruby超入門')
-    # tableのindex行目にフォーカスを絞り込んで検証とボタンクリックを実行する
     within(all('tbody tr')[index]) do
       assert_text 'Ruby超入門'
       page.accept_confirm do
